@@ -20,6 +20,8 @@ class InputMethodManagerV2 : public QWaylandClientExtensionTemplate<InputMethodM
 public:
 	InputMethodManagerV2();
 
+	Q_INVOKABLE void hideKeyboard();
+
 public slots:
 	void handleExtensionActive();
 

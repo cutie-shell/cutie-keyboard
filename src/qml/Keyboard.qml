@@ -44,8 +44,8 @@ Item {
             contentHeight: keyboard.height+1
 
             onContentYChanged: {
-                //if(contentY < -keyboard.height/3)
-                //    Qt.quit()
+                if(contentY < -keyboard.height/3)
+                    inputMgr.hideKeyboard()
             }
 
             onMovementEnded: {

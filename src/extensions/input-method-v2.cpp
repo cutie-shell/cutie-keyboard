@@ -28,6 +28,11 @@ void InputMethodManagerV2::handleExtensionActive()
     }
 }
 
+void InputMethodManagerV2::hideKeyboard()
+{
+    emit inputMethodDeactivated();
+}
+
 InputMethodV2::InputMethodV2(struct ::zwp_input_method_v2 *wl_object)
     : QWaylandClientExtensionTemplate<InputMethodV2>(1)
     , QtWayland::zwp_input_method_v2(wl_object)
