@@ -21,6 +21,7 @@ public:
 	InputMethodManagerV2();
 
 	Q_INVOKABLE void hideKeyboard();
+	Q_INVOKABLE void sendString(QString string);
 
 public slots:
 	void handleExtensionActive();

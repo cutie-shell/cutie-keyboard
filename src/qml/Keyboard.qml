@@ -17,8 +17,8 @@ Item {
     property double rowSpacing:     0.01 * width  // horizontal spacing between keyboard
     property double columnSpacing:  0.02 * height // vertical   spacing between keyboard
     property bool   shift:          false
-    property bool   symbols:        false
     property bool   ctrl:           false
+    property bool   alt:            false
     property double columns:        10
     property double rows:           5
 
@@ -103,9 +103,14 @@ Item {
                                         width: keyWidth * keyboard.width / columns - rowSpacing
                                         height: keyboard.height * 0.65 / rows - columnSpacing
                                         checked: displayText == "\u21E7" && mainView.shift || 
-                                                    displayText == "Ctrl" && mainView.ctrl
-                                        onClicked: {
-                                            mainView.clicked(displayText)
+                                                    displayText == "Ctrl" && mainView.ctrl ||
+                                                    displayText == "Alt" && mainView.alt
+                                        onPressAndHold: {
+                                            mainView.pressed(text)
+                                        }
+
+                                        onReleased: {
+                                            mainView.released(text)
                                         }
                                     }
                                 }
@@ -124,14 +129,18 @@ Item {
                                     model: kbdLayout.item.row1B_model
                                     
                                     delegate: KeyButton {
-                                        text: keyCode == "SPACE" ? kbdLayout.item.layout : 
-                                            shift && capitalization ? displayText.toUpperCase() : displayText
+                                        text: displayText == "" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                         width: keyWidth * keyboard.width / columns - rowSpacing
                                         height: keyboard.height * 0.65 / rows - columnSpacing
                                         checked: displayText == "\u21E7" && mainView.shift || 
-                                                    displayText == "Ctrl" && mainView.ctrl
-                                        onClicked: {
-                                            mainView.clicked(displayText)
+                                                    displayText == "Ctrl" && mainView.ctrl ||
+                                                    displayText == "Alt" && mainView.alt
+                                        onPressAndHold: {
+                                            mainView.pressed(text)
+                                        }
+
+                                        onReleased: {
+                                            mainView.released(text)
                                         }
                                     }
                                 }
@@ -182,14 +191,18 @@ Item {
                                         model: kbdLayout.item.row2_model
                                         
                                         delegate: KeyButton {
-                                            text: keyCode == "SPACE" ? kbdLayout.item.layout : 
-                                                shift && capitalization ? displayText.toUpperCase() : displayText
+                                            text: displayText == "" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height: keyboard.height * 1.05/ rows - columnSpacing
                                             checked: displayText == "\u21E7" && mainView.shift || 
-                                                    displayText == "Ctrl" && mainView.ctrl
-                                            onClicked: {
-                                                mainView.clicked(displayText)
+                                                        displayText == "Ctrl" && mainView.ctrl ||
+                                                        displayText == "Alt" && mainView.alt
+                                            onPressAndHold: {
+                                                mainView.pressed(text)
+                                            }
+
+                                            onReleased: {
+                                                mainView.released(text)
                                             }
                                         }
                                     }
@@ -203,14 +216,18 @@ Item {
                                         model: kbdLayout.item.row3_model
                                         
                                         delegate: KeyButton {
-                                            text: keyCode == "SPACE" ? kbdLayout.item.layout : 
-                                                shift && capitalization ? displayText.toUpperCase() : displayText
+                                            text: displayText == "" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height: keyboard.height * 1.05/ rows - columnSpacing
                                             checked: displayText == "\u21E7" && mainView.shift || 
-                                                    displayText == "Ctrl" && mainView.ctrl
-                                            onClicked: {
-                                                mainView.clicked(displayText)
+                                                        displayText == "Ctrl" && mainView.ctrl ||
+                                                        displayText == "Alt" && mainView.alt
+                                            onPressAndHold: {
+                                                mainView.pressed(text)
+                                            }
+
+                                            onReleased: {
+                                                mainView.released(text)
                                             }
                                         }
                                     }
@@ -224,14 +241,18 @@ Item {
                                         model: kbdLayout.item.row4_model
                                         
                                         delegate: KeyButton {
-                                            text: keyCode == "SPACE" ? kbdLayout.item.layout : 
-                                                shift && capitalization ? displayText.toUpperCase() : displayText
+                                            text: displayText == "" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height: keyboard.height * 1.05 / rows - columnSpacing
                                             checked: displayText == "\u21E7" && mainView.shift || 
-                                                    displayText == "Ctrl" && mainView.ctrl
-                                            onClicked: {
-                                                mainView.clicked(displayText)
+                                                        displayText == "Ctrl" && mainView.ctrl ||
+                                                        displayText == "Alt" && mainView.alt
+                                            onPressAndHold: {
+                                                mainView.pressed(text)
+                                            }
+
+                                            onReleased: {
+                                                mainView.released(text)
                                             }
                                         }
                                     }
@@ -256,14 +277,18 @@ Item {
                                         model: kbdLayout.item.row2B_model
                                         
                                         delegate: KeyButton {
-                                            text: keyCode == "SPACE" ? kbdLayout.item.layout : 
-                                                shift && capitalization ? displayText.toUpperCase() : displayText
+                                            text: displayText == "" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height: keyboard.height * 1.05/ rows - columnSpacing
                                             checked: displayText == "\u21E7" && mainView.shift || 
-                                                    displayText == "Ctrl" && mainView.ctrl
-                                            onClicked: {
-                                                mainView.clicked(displayText)
+                                                        displayText == "Ctrl" && mainView.ctrl ||
+                                                        displayText == "Alt" && mainView.alt
+                                            onPressAndHold: {
+                                                mainView.pressed(text)
+                                            }
+
+                                            onReleased: {
+                                                mainView.released(text)
                                             }
                                         }
                                     }
@@ -277,14 +302,18 @@ Item {
                                         model: kbdLayout.item.row3B_model
                                         
                                         delegate: KeyButton {
-                                            text: keyCode == "SPACE" ? kbdLayout.item.layout : 
-                                                shift && capitalization ? displayText.toUpperCase() : displayText
+                                            text: displayText == "" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height: keyboard.height * 1.05/ rows - columnSpacing
                                             checked: displayText == "\u21E7" && mainView.shift || 
-                                                    displayText == "Ctrl" && mainView.ctrl
-                                            onClicked: {
-                                                mainView.clicked(displayText)
+                                                        displayText == "Ctrl" && mainView.ctrl ||
+                                                        displayText == "Alt" && mainView.alt
+                                            onPressAndHold: {
+                                                mainView.pressed(text)
+                                            }
+
+                                            onReleased: {
+                                                mainView.released(text)
                                             }
                                         }
                                     }
@@ -298,14 +327,18 @@ Item {
                                         model: kbdLayout.item.row4B_model
                                         
                                         delegate: KeyButton {
-                                            text: keyCode == "SPACE" ? kbdLayout.item.layout : 
-                                                shift && capitalization ? displayText.toUpperCase() : displayText
+                                            text: displayText == "" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                             width: keyWidth * keyboard.width / columns - rowSpacing
-                                            height: keyboard.height * 1.05 / rows - columnSpacing
+                                            height: keyboard.height * 1.05/ rows - columnSpacing
                                             checked: displayText == "\u21E7" && mainView.shift || 
-                                                    displayText == "Ctrl" && mainView.ctrl
-                                            onClicked: {
-                                                mainView.clicked(displayText)
+                                                        displayText == "Ctrl" && mainView.ctrl ||
+                                                        displayText == "Alt" && mainView.alt
+                                            onPressAndHold: {
+                                                mainView.pressed(text)
+                                            }
+
+                                            onReleased: {
+                                                mainView.released(text)
                                             }
                                         }
                                     }
@@ -323,14 +356,18 @@ Item {
                             model: shift ? kbdLayout.item.row5_model_shift : kbdLayout.item.row5_model
                             
                             delegate: KeyButton {
-                                text: keyCode == "SPACE" ? kbdLayout.item.layout : 
-                                    shift && capitalization ? displayText.toUpperCase() : displayText
+                                text: displayText == "" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                 width: keyWidth * keyboard.width / columns - rowSpacing
-                                height: keyboard.height * 1.05 / rows - columnSpacing
+                                height: keyboard.height * 1.05/ rows - columnSpacing
                                 checked: displayText == "\u21E7" && mainView.shift || 
-                                        displayText == "Ctrl" && mainView.ctrl
-                                onClicked: {
-                                    mainView.clicked(displayText)
+                                displayText == "Ctrl" && mainView.ctrl ||
+                                displayText == "Alt" && mainView.alt
+                                onPressAndHold: {
+                                    mainView.pressed(text)
+                                }
+
+                                onReleased: {
+                                    mainView.released(text)
                                 }
                             }
                         }
@@ -340,26 +377,86 @@ Item {
         }
     }
     
-    signal clicked(string text)
-    onClicked: {
-        var modifier = Qt.NoModifier;
-        if(text == '\u2190') { //ENTER
-            vkbd.send_key(text, 1);
-            vkbd.send_key(text, 0);
+    signal pressed(string text)
+    signal released(string text)
+
+    onPressed: {
+        if(text == '\u21B5') //ENTER
+            inputMgr.sendFunctionKey(Qt.Key_Enter, 1)
+        else if(text == kbdLayout.item.layout) //SPACE
+            inputMgr.sendFunctionKey(Qt.Key_Space, 1)
+        else if(text == '\u21E6') //BACKSPACE
+            inputMgr.sendFunctionKey(Qt.Key_Backspace, 1)
+        else if(text == '\u21D1') //UP
+            inputMgr.sendFunctionKey(Qt.Key_Up, 1)
+        else if(text == '\u21D3') //DOWN
+            inputMgr.sendFunctionKey(Qt.Key_Down, 1)
+        else if(text == '\u21D0') //LEFT
+            inputMgr.sendFunctionKey(Qt.Key_Left, 1)
+        else if(text == '\u21D2') //RIGHT
+            inputMgr.sendFunctionKey(Qt.Key_Right, 1)
+        else if(text == '\u21E5') //TAB 
+            inputMgr.sendFunctionKey(Qt.Key_Tab, 1)
+    }
+
+    onReleased: {
+        if(text == '\u21B5') //ENTER
+        {
+            inputMgr.sendFunctionKey(Qt.Key_Enter, 1)
+            inputMgr.sendFunctionKey(Qt.Key_Enter, 0)
         }
-        else if(text == Qt.ShiftModifier)
+        else if(text == kbdLayout.item.layout) //SPACE
+        {
+            inputMgr.sendFunctionKey(Qt.Key_Space, 1)
+            inputMgr.sendFunctionKey(Qt.Key_Space, 0)
+        }
+        else if(text == '\u21E6') //BACKSPACE
+        {
+            inputMgr.sendFunctionKey(Qt.Key_Backspace, 1)
+            inputMgr.sendFunctionKey(Qt.Key_Backspace, 0)
+        }
+        else if(text == '\u21D1') //UP
+        {
+            inputMgr.sendFunctionKey(Qt.Key_Up, 1)
+            inputMgr.sendFunctionKey(Qt.Key_Up, 0)
+        }
+        else if(text == '\u21D3') //DOWN
+        {
+            inputMgr.sendFunctionKey(Qt.Key_Down, 1)
+            inputMgr.sendFunctionKey(Qt.Key_Down, 0)
+        }
+        else if(text == '\u21D0') //LEFT
+        {
+            inputMgr.sendFunctionKey(Qt.Key_Left, 1)
+            inputMgr.sendFunctionKey(Qt.Key_Left, 0)
+        }
+        else if(text == '\u21D2') //RIGHT
+        {
+            inputMgr.sendFunctionKey(Qt.Key_Right, 1)
+            inputMgr.sendFunctionKey(Qt.Key_Right, 0)
+        }
+        else if(text == '\u21E5') //TAB
+        {
+            inputMgr.sendFunctionKey(Qt.Key_Tab, 1)
+            inputMgr.sendFunctionKey(Qt.Key_Tab, 0)
+        }
+        else if(text == '\u21E7')
             shift = !shift
-        else if(text == Qt.ControlModifier)
+        else if(text == 'Ctrl')
             ctrl = !ctrl
+        else if(text == 'Alt')
+            alt = !alt
         else {
-            if(shift)
-                modifier = Qt.ShiftModifier
-            if(ctrl)
-                modifier = Qt.ControlModifier
-            vkbd.send_key(text, 1, modifier);
-            vkbd.send_key(text, 0, modifier);
+            if(ctrl){
+                inputMgr.sendEvent(text, Qt.ControlModifier);
+            } else if(alt){
+                inputMgr.sendEvent(text, Qt.AltModifier);
+            } else {
+                inputMgr.sendString(text);
+            }
             shift = false
             ctrl = false
+            alt = false
         }
     }
 }

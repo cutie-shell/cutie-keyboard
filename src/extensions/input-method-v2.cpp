@@ -33,6 +33,11 @@ void InputMethodManagerV2::hideKeyboard()
     emit inputMethodDeactivated();
 }
 
+void InputMethodManagerV2::sendString(QString string)
+{
+    m_inputmethod->commit_string(string);
+}
+
 InputMethodV2::InputMethodV2(struct ::zwp_input_method_v2 *wl_object)
     : QWaylandClientExtensionTemplate<InputMethodV2>(1)
     , QtWayland::zwp_input_method_v2(wl_object)
