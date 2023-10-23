@@ -21,7 +21,8 @@ public:
 	InputMethodManagerV2();
 
 	Q_INVOKABLE void hideKeyboard();
-	Q_INVOKABLE void sendString(QString string);
+	Q_INVOKABLE void pressed(QString string);
+	Q_INVOKABLE void released();
 
 public slots:
 	void handleExtensionActive();
@@ -44,6 +45,7 @@ class InputMethodV2 : public QWaylandClientExtensionTemplate<InputMethodV2>
 	Q_OBJECT
 public:
 	InputMethodV2(struct ::zwp_input_method_v2 *wl_object);
+	uint32_t serial = 0;
 
 signals:
 	void inputMethodActivated();
@@ -57,6 +59,7 @@ protected:
 	void zwp_input_method_v2_content_type(uint32_t hint, uint32_t purpose) override;
 	void zwp_input_method_v2_done() override;
 	void zwp_input_method_v2_unavailable() override;
+
 };
 
 QT_END_NAMESPACE

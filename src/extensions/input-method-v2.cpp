@@ -33,9 +33,14 @@ void InputMethodManagerV2::hideKeyboard()
     emit inputMethodDeactivated();
 }
 
-void InputMethodManagerV2::sendString(QString string)
+void InputMethodManagerV2::pressed(QString string)
 {
     m_inputmethod->commit_string(string);
+}
+
+void InputMethodManagerV2::released()
+{
+    m_inputmethod->commit(m_inputmethod->serial);
 }
 
 InputMethodV2::InputMethodV2(struct ::zwp_input_method_v2 *wl_object)
@@ -69,6 +74,7 @@ void InputMethodV2::zwp_input_method_v2_content_type(uint32_t hint, uint32_t pur
 
 void InputMethodV2::zwp_input_method_v2_done()
 {
+    serial += 1;
 }
 
 void InputMethodV2::zwp_input_method_v2_unavailable()
