@@ -13,6 +13,7 @@ CutieKeyboard::CutieKeyboard(QQuickView *parent)
     m_lsWindow->setAnchors(LayerShellQt::Window::AnchorBottom);
     m_lsWindow->setKeyboardInteractivity(LayerShellQt::Window::KeyboardInteractivityNone);
     m_lsWindow->setExclusiveZone(m_screenSize.height()*0.36);
+    m_lsWindow->setScope("cutie-keyboard");
     this->resize(m_screenSize.width(), m_screenSize.height()*0.36);
     this->setResizeMode(QQuickView::SizeRootObjectToView);
     this->setSource(QUrl("qrc:/qml/Keyboard.qml"));
