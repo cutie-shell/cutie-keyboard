@@ -26,7 +26,8 @@ public:
 
 public slots:
 	void handleExtensionActive();
-
+	void handleImActivated();
+	
 signals:
 	void inputMethodActivated();
 	void inputMethodDeactivated();
@@ -37,6 +38,7 @@ private:
 	InputMethodV2 *m_inputmethod;
 
 	bool m_activated = false;
+	bool m_hidden = true;
 };
 
 class InputMethodV2 : public QWaylandClientExtensionTemplate<InputMethodV2>

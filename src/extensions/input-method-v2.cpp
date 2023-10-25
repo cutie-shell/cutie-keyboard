@@ -23,14 +23,24 @@ void InputMethodManagerV2::handleExtensionActive()
             auto *obj = QtWayland::zwp_input_method_manager_v2::get_input_method(static_cast<struct ::wl_seat *>(seat));
             m_inputmethod = new InputMethodV2(obj);
         }
-        connect (m_inputmethod, &InputMethodV2::inputMethodActivated, this, &InputMethodManagerV2::inputMethodActivated);
+        connect (m_inputmethod, &InputMethodV2::inputMethodActivated, this, &InputMethodManagerV2::handleImActivated);
         connect (m_inputmethod, &InputMethodV2::inputMethodDeactivated, this, &InputMethodManagerV2::inputMethodDeactivated);
     }
 }
 
 void InputMethodManagerV2::hideKeyboard()
 {
-    emit inputMethodDeactivated();
+    if(!m_hidden){
+        m_hidden = true;
+        emit inputMethodDeactivated();
+    }
+}
+
+void InputMethodManagerV2::handleImActivated()
+{
+    if(m_hidden)
+        m_hidden = false;
+    emit inputMethodActivated();
 }
 
 void InputMethodManagerV2::pressed(QString string)

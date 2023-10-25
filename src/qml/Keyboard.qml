@@ -21,6 +21,7 @@ Item {
     property bool   alt:            false
     property double columns:        10
     property double rows:           5
+    property bool   hideKeyboard:   false
 
     MouseArea {anchors.fill: parent} // don't allow touches to pass to MouseAreas underneath
     
@@ -45,12 +46,17 @@ Item {
 
             onContentYChanged: {
                 if(contentY < -keyboard.height/3)
-                    inputMgr.hideKeyboard()
+                    mainView.hideKeyboard = true
             }
 
             onMovementEnded: {
                 if(contentY != -5)
                     contentY = -5
+
+                if (mainView.hideKeyboard){
+                    mainView.hideKeyboard = false
+                    inputMgr.hideKeyboard()
+                }
             }
 
             Item { // keys

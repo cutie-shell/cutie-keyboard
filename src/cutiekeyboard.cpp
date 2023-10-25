@@ -27,10 +27,12 @@ CutieKeyboard::CutieKeyboard(QQuickView *parent)
 
 void CutieKeyboard::showKeyboard()
 {
+    this->resize(m_screenSize.width(), m_screenSize.height()*0.36);
     QQuickView::show();
 }
 
 void CutieKeyboard::hideKeyboard()
 {
+    this->resize(1, 1);
     QQuickView::hide();
 }
