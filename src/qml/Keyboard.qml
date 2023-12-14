@@ -10,9 +10,9 @@ Item {
     focus: false
     
     InputMethodManagerV2{
-          id: inputMgr
-          objectName: "inputMgr"
-    }
+      id: inputMgr
+      objectName: "inputMgr"
+  }
 
     property double rowSpacing:     0.01 * width  // horizontal spacing between keyboard
     property double columnSpacing:  0.02 * height // vertical   spacing between keyboard
@@ -22,6 +22,7 @@ Item {
     property double columns:        10
     property double rows:           5
     property bool   hideKeyboard:   false
+    property bool   pressAndHold:   false
 
     MouseArea {anchors.fill: parent} // don't allow touches to pass to MouseAreas underneath
     
@@ -108,23 +109,44 @@ Item {
                                         width: keyWidth * keyboard.width / columns - rowSpacing
                                         height: keyboard.height * 0.65 / rows - columnSpacing
                                         checked: displayText == "\u21E7" && mainView.shift || 
-                                                    displayText == "Ctrl" && mainView.ctrl ||
-                                                    displayText == "Alt" && mainView.alt
-                                        onPressed: {
-                                            if(text == '\u21E7')
-                                                shift = !shift
-                                            else if(text == 'Ctrl')
-                                                ctrl = !ctrl
-                                            else if(text == 'Alt')
-                                                alt = !alt
-                                            else if(displayText == "CUTIE_SPACE")
+                                        displayText == "Ctrl" && mainView.ctrl ||
+                                        displayText == "Alt" && mainView.alt
+                                        onPressAndHold: {
+                                            mainView.pressAndHold = true
+                                            if(displayText == "CUTIE_SPACE")
                                                 inputMgr.pressed(displayText);
                                             else
                                                 inputMgr.pressed(text);
                                         }
 
+                                        onClicked: {
+                                            if(!mainView.pressAndHold){
+                                                if(text == '\u21E7'){
+                                                    shift = !shift
+                                                    return
+                                                }
+                                                if(text == 'Ctrl')
+                                                    ctrl = !ctrl
+                                                else if(text == 'Alt')
+                                                    alt = !alt
+                                                if(displayText == "CUTIE_SPACE")
+                                                    inputMgr.pressed(displayText);
+                                                else
+                                                    inputMgr.pressed(text);
+                                                inputMgr.released();
+                                                if(text != 'Ctrl' && text != 'Alt'){
+                                                    ctrl = false
+                                                    alt = false
+                                                    shift = false
+                                                }
+                                            }
+                                        }
+
                                         onReleased: {
-                                            inputMgr.released();
+                                            if(mainView.pressAndHold){
+                                                inputMgr.released();
+                                                mainView.pressAndHold = false
+                                            }
                                         }
                                     }
                                 }
@@ -147,23 +169,44 @@ Item {
                                         width: keyWidth * keyboard.width / columns - rowSpacing
                                         height: keyboard.height * 0.65 / rows - columnSpacing
                                         checked: displayText == "\u21E7" && mainView.shift || 
-                                                    displayText == "Ctrl" && mainView.ctrl ||
-                                                    displayText == "Alt" && mainView.alt
-                                        onPressed: {
-                                            if(text == '\u21E7')
-                                                shift = !shift
-                                            else if(text == 'Ctrl')
-                                                ctrl = !ctrl
-                                            else if(text == 'Alt')
-                                                alt = !alt
-                                            else if(displayText == "CUTIE_SPACE")
+                                        displayText == "Ctrl" && mainView.ctrl ||
+                                        displayText == "Alt" && mainView.alt
+                                        onPressAndHold: {
+                                            mainView.pressAndHold = true
+                                            if(displayText == "CUTIE_SPACE")
                                                 inputMgr.pressed(displayText);
                                             else
                                                 inputMgr.pressed(text);
                                         }
 
+                                        onClicked: {
+                                            if(!mainView.pressAndHold){
+                                                if(text == '\u21E7'){
+                                                    shift = !shift
+                                                    return
+                                                }
+                                                if(text == 'Ctrl')
+                                                    ctrl = !ctrl
+                                                else if(text == 'Alt')
+                                                    alt = !alt
+                                                if(displayText == "CUTIE_SPACE")
+                                                    inputMgr.pressed(displayText);
+                                                else
+                                                    inputMgr.pressed(text);
+                                                inputMgr.released();
+                                                if(text != 'Ctrl' && text != 'Alt'){
+                                                    ctrl = false
+                                                    alt = false
+                                                    shift = false
+                                                }
+                                            }
+                                        }
+
                                         onReleased: {
-                                            inputMgr.released();
+                                            if(mainView.pressAndHold){
+                                                inputMgr.released();
+                                                mainView.pressAndHold = false
+                                            }
                                         }
                                     }
                                 }
@@ -217,22 +260,44 @@ Item {
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height: keyboard.height * 1.05 / rows - columnSpacing
                                             checked: displayText == "\u21E7" && mainView.shift || 
-                                                        displayText == "Ctrl" && mainView.ctrl ||
-                                                        displayText == "Alt" && mainView.alt
-                                            onPressed: {
-                                                if(text == '\u21E7')
-                                                    shift = !shift
-                                                else if(text == 'Ctrl')
-                                                    ctrl = !ctrl
-                                                else if(text == 'Alt')
-                                                    alt = !alt
-                                                else if(displayText == "CUTIE_SPACE")
+                                            displayText == "Ctrl" && mainView.ctrl ||
+                                            displayText == "Alt" && mainView.alt
+                                            onPressAndHold: {
+                                                mainView.pressAndHold = true
+                                                if(displayText == "CUTIE_SPACE")
                                                     inputMgr.pressed(displayText);
                                                 else
                                                     inputMgr.pressed(text);
                                             }
+
+                                            onClicked: {
+                                                if(!mainView.pressAndHold){
+                                                    if(text == '\u21E7'){
+                                                        shift = !shift
+                                                        return
+                                                    }
+                                                    if(text == 'Ctrl')
+                                                        ctrl = !ctrl
+                                                    else if(text == 'Alt')
+                                                        alt = !alt
+                                                    if(displayText == "CUTIE_SPACE")
+                                                        inputMgr.pressed(displayText);
+                                                    else
+                                                        inputMgr.pressed(text);
+                                                    inputMgr.released();
+                                                    if(text != 'Ctrl' && text != 'Alt'){
+                                                        ctrl = false
+                                                        alt = false
+                                                        shift = false
+                                                    }
+                                                }
+                                            }
+
                                             onReleased: {
-                                                inputMgr.released();
+                                                if(mainView.pressAndHold){
+                                                    inputMgr.released();
+                                                    mainView.pressAndHold = false
+                                                }
                                             }
                                         }
                                     }
@@ -250,23 +315,44 @@ Item {
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height: keyboard.height * 1.05 / rows - columnSpacing
                                             checked: displayText == "\u21E7" && mainView.shift || 
-                                                        displayText == "Ctrl" && mainView.ctrl ||
-                                                        displayText == "Alt" && mainView.alt
-                                            onPressed: {
-                                                if(text == '\u21E7')
-                                                    shift = !shift
-                                                else if(text == 'Ctrl')
-                                                    ctrl = !ctrl
-                                                else if(text == 'Alt')
-                                                    alt = !alt
-                                                else if(displayText == "CUTIE_SPACE")
+                                            displayText == "Ctrl" && mainView.ctrl ||
+                                            displayText == "Alt" && mainView.alt
+                                            onPressAndHold: {
+                                                mainView.pressAndHold = true
+                                                if(displayText == "CUTIE_SPACE")
                                                     inputMgr.pressed(displayText);
                                                 else
                                                     inputMgr.pressed(text);
                                             }
 
+                                            onClicked: {
+                                                if(!mainView.pressAndHold){
+                                                    if(text == '\u21E7'){
+                                                        shift = !shift
+                                                        return
+                                                    }
+                                                    if(text == 'Ctrl')
+                                                        ctrl = !ctrl
+                                                    else if(text == 'Alt')
+                                                        alt = !alt
+                                                    if(displayText == "CUTIE_SPACE")
+                                                        inputMgr.pressed(displayText);
+                                                    else
+                                                        inputMgr.pressed(text);
+                                                    inputMgr.released();
+                                                    if(text != 'Ctrl' && text != 'Alt'){
+                                                        ctrl = false
+                                                        alt = false
+                                                        shift = false
+                                                    }
+                                                }
+                                            }
+
                                             onReleased: {
-                                                inputMgr.released();
+                                                if(mainView.pressAndHold){
+                                                    inputMgr.released();
+                                                    mainView.pressAndHold = false
+                                                }
                                             }
                                         }
                                     }
@@ -284,23 +370,44 @@ Item {
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height: keyboard.height * 1.05 / rows - columnSpacing
                                             checked: displayText == "\u21E7" && mainView.shift || 
-                                                        displayText == "Ctrl" && mainView.ctrl ||
-                                                        displayText == "Alt" && mainView.alt
-                                            onPressed: {
-                                                if(text == '\u21E7')
-                                                    shift = !shift
-                                                else if(text == 'Ctrl')
-                                                    ctrl = !ctrl
-                                                else if(text == 'Alt')
-                                                    alt = !alt
-                                                else if(displayText == "CUTIE_SPACE")
+                                            displayText == "Ctrl" && mainView.ctrl ||
+                                            displayText == "Alt" && mainView.alt
+                                            onPressAndHold: {
+                                                mainView.pressAndHold = true
+                                                if(displayText == "CUTIE_SPACE")
                                                     inputMgr.pressed(displayText);
                                                 else
                                                     inputMgr.pressed(text);
                                             }
 
+                                            onClicked: {
+                                                if(!mainView.pressAndHold){
+                                                    if(text == '\u21E7'){
+                                                        shift = !shift
+                                                        return
+                                                    }
+                                                    if(text == 'Ctrl')
+                                                        ctrl = !ctrl
+                                                    else if(text == 'Alt')
+                                                        alt = !alt
+                                                    if(displayText == "CUTIE_SPACE")
+                                                        inputMgr.pressed(displayText);
+                                                    else
+                                                        inputMgr.pressed(text);
+                                                    inputMgr.released();
+                                                    if(text != 'Ctrl' && text != 'Alt'){
+                                                        ctrl = false
+                                                        alt = false
+                                                        shift = false
+                                                    }
+                                                }
+                                            }
+
                                             onReleased: {
-                                                inputMgr.released();
+                                                if(mainView.pressAndHold){
+                                                    inputMgr.released();
+                                                    mainView.pressAndHold = false
+                                                }
                                             }
                                         }
                                     }
@@ -329,23 +436,44 @@ Item {
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height: keyboard.height * 1.05 / rows - columnSpacing
                                             checked: displayText == "\u21E7" && mainView.shift || 
-                                                        displayText == "Ctrl" && mainView.ctrl ||
-                                                        displayText == "Alt" && mainView.alt
-                                            onPressed: {
-                                                if(text == '\u21E7')
-                                                    shift = !shift
-                                                else if(text == 'Ctrl')
-                                                    ctrl = !ctrl
-                                                else if(text == 'Alt')
-                                                    alt = !alt
-                                                else if(displayText == "CUTIE_SPACE")
+                                            displayText == "Ctrl" && mainView.ctrl ||
+                                            displayText == "Alt" && mainView.alt
+                                            onPressAndHold: {
+                                                mainView.pressAndHold = true
+                                                if(displayText == "CUTIE_SPACE")
                                                     inputMgr.pressed(displayText);
                                                 else
                                                     inputMgr.pressed(text);
                                             }
 
+                                            onClicked: {
+                                                if(!mainView.pressAndHold){
+                                                    if(text == '\u21E7'){
+                                                        shift = !shift
+                                                        return
+                                                    }
+                                                    if(text == 'Ctrl')
+                                                        ctrl = !ctrl
+                                                    else if(text == 'Alt')
+                                                        alt = !alt
+                                                    if(displayText == "CUTIE_SPACE")
+                                                        inputMgr.pressed(displayText);
+                                                    else
+                                                        inputMgr.pressed(text);
+                                                    inputMgr.released();
+                                                    if(text != 'Ctrl' && text != 'Alt'){
+                                                        ctrl = false
+                                                        alt = false
+                                                        shift = false
+                                                    }
+                                                }
+                                            }
+
                                             onReleased: {
-                                                inputMgr.released();
+                                                if(mainView.pressAndHold){
+                                                    inputMgr.released();
+                                                    mainView.pressAndHold = false
+                                                }
                                             }
                                         }
                                     }
@@ -363,23 +491,44 @@ Item {
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height: keyboard.height * 1.05 / rows - columnSpacing
                                             checked: displayText == "\u21E7" && mainView.shift || 
-                                                        displayText == "Ctrl" && mainView.ctrl ||
-                                                        displayText == "Alt" && mainView.alt
-                                            onPressed: {
-                                                if(text == '\u21E7')
-                                                    shift = !shift
-                                                else if(text == 'Ctrl')
-                                                    ctrl = !ctrl
-                                                else if(text == 'Alt')
-                                                    alt = !alt
-                                                else if(displayText == "CUTIE_SPACE")
+                                            displayText == "Ctrl" && mainView.ctrl ||
+                                            displayText == "Alt" && mainView.alt
+                                            onPressAndHold: {
+                                                mainView.pressAndHold = true
+                                                if(displayText == "CUTIE_SPACE")
                                                     inputMgr.pressed(displayText);
                                                 else
                                                     inputMgr.pressed(text);
                                             }
 
+                                            onClicked: {
+                                                if(!mainView.pressAndHold){
+                                                    if(text == '\u21E7'){
+                                                        shift = !shift
+                                                        return
+                                                    }
+                                                    if(text == 'Ctrl')
+                                                        ctrl = !ctrl
+                                                    else if(text == 'Alt')
+                                                        alt = !alt
+                                                    if(displayText == "CUTIE_SPACE")
+                                                        inputMgr.pressed(displayText);
+                                                    else
+                                                        inputMgr.pressed(text);
+                                                    inputMgr.released();
+                                                    if(text != 'Ctrl' && text != 'Alt'){
+                                                        ctrl = false
+                                                        alt = false
+                                                        shift = false
+                                                    }
+                                                }
+                                            }
+
                                             onReleased: {
-                                                inputMgr.released();
+                                                if(mainView.pressAndHold){
+                                                    inputMgr.released();
+                                                    mainView.pressAndHold = false
+                                                }
                                             }
                                         }
                                     }
@@ -397,23 +546,44 @@ Item {
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height: keyboard.height * 1.05 / rows - columnSpacing
                                             checked: displayText == "\u21E7" && mainView.shift || 
-                                                        displayText == "Ctrl" && mainView.ctrl ||
-                                                        displayText == "Alt" && mainView.alt
-                                            onPressed: {
-                                                if(text == '\u21E7')
-                                                    shift = !shift
-                                                else if(text == 'Ctrl')
-                                                    ctrl = !ctrl
-                                                else if(text == 'Alt')
-                                                    alt = !alt
-                                                else if(displayText == "CUTIE_SPACE")
+                                            displayText == "Ctrl" && mainView.ctrl ||
+                                            displayText == "Alt" && mainView.alt
+                                            onPressAndHold: {
+                                                mainView.pressAndHold = true
+                                                if(displayText == "CUTIE_SPACE")
                                                     inputMgr.pressed(displayText);
                                                 else
                                                     inputMgr.pressed(text);
                                             }
 
+                                            onClicked: {
+                                                if(!mainView.pressAndHold){
+                                                    if(text == '\u21E7'){
+                                                        shift = !shift
+                                                        return
+                                                    }
+                                                    if(text == 'Ctrl')
+                                                        ctrl = !ctrl
+                                                    else if(text == 'Alt')
+                                                        alt = !alt
+                                                    if(displayText == "CUTIE_SPACE")
+                                                        inputMgr.pressed(displayText);
+                                                    else
+                                                        inputMgr.pressed(text);
+                                                    inputMgr.released();
+                                                    if(text != 'Ctrl' && text != 'Alt'){
+                                                        ctrl = false
+                                                        alt = false
+                                                        shift = false
+                                                    }
+                                                }
+                                            }
+
                                             onReleased: {
-                                                inputMgr.released();
+                                                if(mainView.pressAndHold){
+                                                    inputMgr.released();
+                                                    mainView.pressAndHold = false
+                                                }
                                             }
                                         }
                                     }
@@ -435,23 +605,44 @@ Item {
                                 width: keyWidth * keyboard.width / columns - rowSpacing
                                 height: keyboard.height * 1.05 / rows - columnSpacing
                                 checked: displayText == "\u21E7" && mainView.shift || 
-                                            displayText == "Ctrl" && mainView.ctrl ||
-                                            displayText == "Alt" && mainView.alt
-                                onPressed: {
-                                    if(text == '\u21E7')
-                                        shift = !shift
-                                    else if(text == 'Ctrl')
-                                        ctrl = !ctrl
-                                    else if(text == 'Alt')
-                                        alt = !alt
-                                    else if(displayText == "CUTIE_SPACE")
+                                        displayText == "Ctrl" && mainView.ctrl ||
+                                        displayText == "Alt" && mainView.alt
+                                onPressAndHold: {
+                                    mainView.pressAndHold = true
+                                    if(displayText == "CUTIE_SPACE")
                                         inputMgr.pressed(displayText);
                                     else
                                         inputMgr.pressed(text);
                                 }
 
+                                onClicked: {
+                                    if(!mainView.pressAndHold){
+                                        if(text == '\u21E7'){
+                                            shift = !shift
+                                            return
+                                        }
+                                        if(text == 'Ctrl')
+                                            ctrl = !ctrl
+                                        else if(text == 'Alt')
+                                            alt = !alt
+                                        if(displayText == "CUTIE_SPACE")
+                                            inputMgr.pressed(displayText);
+                                        else
+                                            inputMgr.pressed(text);
+                                        inputMgr.released();
+                                        if(text != 'Ctrl' && text != 'Alt'){
+                                            ctrl = false
+                                            alt = false
+                                            shift = false
+                                        }
+                                    }
+                                }
+
                                 onReleased: {
-                                    inputMgr.released();
+                                    if(mainView.pressAndHold){
+                                        inputMgr.released();
+                                        mainView.pressAndHold = false
+                                    }
                                 }
                             }
                         }
