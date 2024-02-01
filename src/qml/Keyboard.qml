@@ -10,9 +10,17 @@ Item {
     focus: false
     
     InputMethodManagerV2{
-      id: inputMgr
-      objectName: "inputMgr"
-  }
+        id: inputMgr
+        objectName: "inputMgr"
+
+        onPurposeChanged: {
+            if(purpose == 4)
+                kbdLayout.source = "layouts/DialPad.qml"
+            else
+                kbdLayout.source = "layouts/en_US.qml"
+            console.log("NEW CONTENT TYPE"+purpose)
+        }
+    }
 
     property double rowSpacing:     0.01 * width  // horizontal spacing between keyboard
     property double columnSpacing:  0.02 * height // vertical   spacing between keyboard
@@ -23,6 +31,7 @@ Item {
     property double rows:           5
     property bool   hideKeyboard:   false
     property bool   pressAndHold:   false
+    property bool   isDialPad:      inputMgr.purpose == 4
 
     MouseArea {anchors.fill: parent} // don't allow touches to pass to MouseAreas underneath
     
@@ -40,7 +49,7 @@ Item {
             id: view
             anchors.fill: parent
 
-            topMargin: 5
+            topMargin: inputMgr.purpose != 4 ? 5 : 0
 
             contentWidth: keyboard.width
             contentHeight: keyboard.height+1
@@ -71,7 +80,7 @@ Item {
 
                     Item {
                         width: mainView.width
-                        height: keyboard.height * 0.65 / rows
+                        height: inputMgr.purpose != 4 ? keyboard.height * 0.65 / rows : keyboard.height / rows - columnSpacing
 
                         PageIndicator {
                             id: numberIndicator
@@ -79,10 +88,11 @@ Item {
                             anchors.bottom: numberSwipe.top
                             count: numberSwipe.count
                             currentIndex: numberSwipe.currentIndex
+                            visible: inputMgr.purpose != 4
 
                             delegate: Rectangle {
                                 implicitWidth: mainView.width/numberSwipe.count
-                                implicitHeight: 2
+                                implicitHeight: inputMgr.purpose != 4 ? 2 : 0
                                 color: index === numberSwipe.currentIndex ? Atmosphere.accentColor : Atmosphere.secondaryColor
 
                                 required property int index
@@ -92,120 +102,137 @@ Item {
                         SwipeView {
                             id: numberSwipe
                             anchors.fill: parent
-                            Row { // 1234567890
-                                spacing: rowSpacing
+                            interactive: inputMgr.purpose != 4
+                            Column {
                                 opacity: SwipeView.isCurrentItem ? 1 : 0
+                                spacing: columnSpacing
+
                                 Behavior on opacity {
                                     OpacityAnimator {
                                         duration: 300
                                     }
                                 }
-                                width: childrenRect.width
-                                Repeater {
-                                    model: shift ? kbdLayout.item.row1_model_shift : kbdLayout.item.row1_model
-                                    
-                                    delegate: KeyButton {
-                                        text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
-                                        width: keyWidth * keyboard.width / columns - rowSpacing
-                                        height: keyboard.height * 0.65 / rows - columnSpacing
-                                        checked: displayText == "\u21E7" && mainView.shift || 
-                                        displayText == "Ctrl" && mainView.ctrl ||
-                                        displayText == "Alt" && mainView.alt
-                                        onPressAndHold: {
-                                            mainView.pressAndHold = true
-                                            if(displayText == "CUTIE_SPACE")
-                                                inputMgr.pressed(displayText);
-                                            else
-                                                inputMgr.pressed(text);
-                                        }
 
-                                        onClicked: {
-                                            if(!mainView.pressAndHold){
-                                                if(text == '\u21E7'){
-                                                    shift = !shift
-                                                    return
-                                                }
-                                                if(text == 'Ctrl')
-                                                    ctrl = !ctrl
-                                                else if(text == 'Alt')
-                                                    alt = !alt
+                                Row { // 1234567890
+                                    spacing: rowSpacing
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    width: childrenRect.width
+                                    Behavior on opacity {
+                                        OpacityAnimator {
+                                            duration: 300
+                                        }
+                                    }
+                                    Repeater {
+                                        model: shift ? kbdLayout.item.row1_model_shift : kbdLayout.item.row1_model
+                                        
+                                        delegate: KeyButton {
+                                            text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
+                                            width: keyWidth * keyboard.width / columns - rowSpacing
+                                            height: inputMgr.purpose != 4 ? keyboard.height * 0.65 / rows - columnSpacing : keyboard.height / rows - columnSpacing
+                                            checked: displayText == "\u21E7" && mainView.shift || 
+                                            displayText == "Ctrl" && mainView.ctrl ||
+                                            displayText == "Alt" && mainView.alt
+                                            onPressAndHold: {
+                                                mainView.pressAndHold = true
                                                 if(displayText == "CUTIE_SPACE")
                                                     inputMgr.pressed(displayText);
                                                 else
                                                     inputMgr.pressed(text);
-                                                inputMgr.released();
-                                                if(text != 'Ctrl' && text != 'Alt'){
-                                                    ctrl = false
-                                                    alt = false
-                                                    shift = false
+                                            }
+
+                                            onClicked: {
+                                                if(!mainView.pressAndHold){
+                                                    if(text == '\u21E7'){
+                                                        shift = !shift
+                                                        return
+                                                    }
+                                                    if(text == 'Ctrl')
+                                                        ctrl = !ctrl
+                                                    else if(text == 'Alt')
+                                                        alt = !alt
+                                                    if(displayText == "CUTIE_SPACE")
+                                                        inputMgr.pressed(displayText);
+                                                    else
+                                                        inputMgr.pressed(text);
+                                                    inputMgr.released();
+                                                    if(text != 'Ctrl' && text != 'Alt'){
+                                                        ctrl = false
+                                                        alt = false
+                                                        shift = false
+                                                    }
                                                 }
                                             }
-                                        }
 
-                                        onReleased: {
-                                            if(mainView.pressAndHold){
-                                                inputMgr.released();
-                                                mainView.pressAndHold = false
+                                            onReleased: {
+                                                if(mainView.pressAndHold){
+                                                    inputMgr.released();
+                                                    mainView.pressAndHold = false
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
 
-                            Row { // 1234567890
-                                spacing: rowSpacing
+                            Column {
                                 opacity: SwipeView.isCurrentItem ? 1 : 0
-                                Behavior on opacity {
-                                    OpacityAnimator {
-                                        duration: 300
-                                    }
-                                }
-                                width: childrenRect.width
-                                Repeater {
-                                    model: kbdLayout.item.row1B_model
-                                    
-                                    delegate: KeyButton {
-                                        text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
-                                        width: keyWidth * keyboard.width / columns - rowSpacing
-                                        height: keyboard.height * 0.65 / rows - columnSpacing
-                                        checked: displayText == "\u21E7" && mainView.shift || 
-                                        displayText == "Ctrl" && mainView.ctrl ||
-                                        displayText == "Alt" && mainView.alt
-                                        onPressAndHold: {
-                                            mainView.pressAndHold = true
-                                            if(displayText == "CUTIE_SPACE")
-                                                inputMgr.pressed(displayText);
-                                            else
-                                                inputMgr.pressed(text);
-                                        }
+                                spacing: columnSpacing
 
-                                        onClicked: {
-                                            if(!mainView.pressAndHold){
-                                                if(text == '\u21E7'){
-                                                    shift = !shift
-                                                    return
-                                                }
-                                                if(text == 'Ctrl')
-                                                    ctrl = !ctrl
-                                                else if(text == 'Alt')
-                                                    alt = !alt
+                                Row { // 1234567890
+                                    spacing: rowSpacing
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    width: childrenRect.width
+                                    Behavior on opacity {
+                                        OpacityAnimator {
+                                            duration: 300
+                                        }
+                                    }
+                                    Repeater {
+                                        model: kbdLayout.item.row1B_model
+                                        
+                                        delegate: KeyButton {
+                                            text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
+                                            width: keyWidth * keyboard.width / columns - rowSpacing
+                                            height: keyboard.height * 0.65 / rows - columnSpacing
+                                            checked: displayText == "\u21E7" && mainView.shift || 
+                                            displayText == "Ctrl" && mainView.ctrl ||
+                                            displayText == "Alt" && mainView.alt
+                                            onPressAndHold: {
+                                                mainView.pressAndHold = true
                                                 if(displayText == "CUTIE_SPACE")
                                                     inputMgr.pressed(displayText);
                                                 else
                                                     inputMgr.pressed(text);
-                                                inputMgr.released();
-                                                if(text != 'Ctrl' && text != 'Alt'){
-                                                    ctrl = false
-                                                    alt = false
-                                                    shift = false
+                                            }
+
+                                            onClicked: {
+                                                if(!mainView.pressAndHold){
+                                                    if(text == '\u21E7'){
+                                                        shift = !shift
+                                                        return
+                                                    }
+                                                    if(text == 'Ctrl')
+                                                        ctrl = !ctrl
+                                                    else if(text == 'Alt')
+                                                        alt = !alt
+                                                    if(displayText == "CUTIE_SPACE")
+                                                        inputMgr.pressed(displayText);
+                                                    else
+                                                        inputMgr.pressed(text);
+                                                    inputMgr.released();
+                                                    if(text != 'Ctrl' && text != 'Alt'){
+                                                        ctrl = false
+                                                        alt = false
+                                                        shift = false
+                                                    }
                                                 }
                                             }
-                                        }
 
-                                        onReleased: {
-                                            if(mainView.pressAndHold){
-                                                inputMgr.released();
-                                                mainView.pressAndHold = false
+                                            onReleased: {
+                                                if(mainView.pressAndHold){
+                                                    inputMgr.released();
+                                                    mainView.pressAndHold = false
+                                                }
                                             }
                                         }
                                     }
@@ -216,15 +243,15 @@ Item {
                     
                     Item {
                         width: mainView.width
-                        height: keyboard.height * 1.05 / rows * 3 - columnSpacing
-                        anchors.topMargin: columnSpacing
+                        height: inputMgr.purpose != 4 ? keyboard.height * 1.05 / rows * 3 - columnSpacing : keyboard.height / rows * 3 - columnSpacing
+                        anchors.topMargin: inputMgr.purpose != 4 ? columnSpacing : 0
                         PageIndicator {
                             id: symbolIndicator
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.bottom: symbolSwipe.top
                             count: symbolSwipe.count
                             currentIndex: symbolSwipe.currentIndex
-
+                            visible: inputMgr.purpose != 4
                             delegate: Rectangle {
                                 implicitWidth: mainView.width/symbolSwipe.count
                                 implicitHeight: 2
@@ -237,7 +264,7 @@ Item {
                         SwipeView {
                             id: symbolSwipe
                             anchors.fill: parent
-
+                            interactive: inputMgr.purpose != 4
                             Column {
                                 opacity: SwipeView.isCurrentItem ? 1 : 0
                                 spacing: columnSpacing
@@ -258,7 +285,7 @@ Item {
                                         delegate: KeyButton {
                                             text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                             width: keyWidth * keyboard.width / columns - rowSpacing
-                                            height: keyboard.height * 1.05 / rows - columnSpacing
+                                            height: inputMgr.purpose != 4 ? keyboard.height * 1.05 / rows - columnSpacing : keyboard.height / rows - columnSpacing
                                             checked: displayText == "\u21E7" && mainView.shift || 
                                             displayText == "Ctrl" && mainView.ctrl ||
                                             displayText == "Alt" && mainView.alt
@@ -313,7 +340,7 @@ Item {
                                         delegate: KeyButton {
                                             text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                             width: keyWidth * keyboard.width / columns - rowSpacing
-                                            height: keyboard.height * 1.05 / rows - columnSpacing
+                                            height:  inputMgr.purpose != 4 ? keyboard.height * 1.05 / rows - columnSpacing : keyboard.height / rows - columnSpacing
                                             checked: displayText == "\u21E7" && mainView.shift || 
                                             displayText == "Ctrl" && mainView.ctrl ||
                                             displayText == "Alt" && mainView.alt
@@ -368,7 +395,7 @@ Item {
                                         delegate: KeyButton {
                                             text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                             width: keyWidth * keyboard.width / columns - rowSpacing
-                                            height: keyboard.height * 1.05 / rows - columnSpacing
+                                            height:  inputMgr.purpose != 4 ? keyboard.height * 1.05 / rows - columnSpacing : keyboard.height / rows - columnSpacing
                                             checked: displayText == "\u21E7" && mainView.shift || 
                                             displayText == "Ctrl" && mainView.ctrl ||
                                             displayText == "Alt" && mainView.alt
@@ -596,17 +623,19 @@ Item {
                     Row {
                         spacing: rowSpacing
                         anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.top: symbolSwipe.bottom 
                         width: childrenRect.width
                         Repeater {
                             model: shift ? kbdLayout.item.row5_model_shift : kbdLayout.item.row5_model
                             
                             delegate: KeyButton {
-                                text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
+                                text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : icon.name != "call-start-symbolic" ? displayText : ""
                                 width: keyWidth * keyboard.width / columns - rowSpacing
-                                height: keyboard.height * 1.05 / rows - columnSpacing
+                                height:  inputMgr.purpose != 4 ? keyboard.height * 1.05 / rows - columnSpacing : keyboard.height / rows - columnSpacing
                                 checked: displayText == "\u21E7" && mainView.shift || 
                                         displayText == "Ctrl" && mainView.ctrl ||
                                         displayText == "Alt" && mainView.alt
+
                                 onPressAndHold: {
                                     mainView.pressAndHold = true
                                     if(displayText == "CUTIE_SPACE")
@@ -625,7 +654,7 @@ Item {
                                             ctrl = !ctrl
                                         else if(text == 'Alt')
                                             alt = !alt
-                                        if(displayText == "CUTIE_SPACE")
+                                        if(displayText == "CUTIE_SPACE" || icon.name == "call-start-symbolic")
                                             inputMgr.pressed(displayText);
                                         else
                                             inputMgr.pressed(text);

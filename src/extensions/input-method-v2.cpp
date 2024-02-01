@@ -25,6 +25,7 @@ void InputMethodManagerV2::handleExtensionActive()
         }
         connect (m_inputmethod, &InputMethodV2::inputMethodActivated, this, &InputMethodManagerV2::handleImActivated);
         connect (m_inputmethod, &InputMethodV2::inputMethodDeactivated, this, &InputMethodManagerV2::inputMethodDeactivated);
+        connect (m_inputmethod, &InputMethodV2::contentTypeChanged, this, &InputMethodManagerV2::onContentTypeChanged);
     }
 }
 
@@ -33,6 +34,8 @@ void InputMethodManagerV2::hideKeyboard()
     if(!m_hidden){
         m_hidden = true;
         emit inputMethodDeactivated();
+        m_purpose = 0;
+        emit purposeChanged();
     }
 }
 
@@ -51,6 +54,19 @@ void InputMethodManagerV2::pressed(QString string)
 void InputMethodManagerV2::released()
 {
     m_inputmethod->commit(m_inputmethod->serial);
+}
+
+int InputMethodManagerV2::get_purpose()
+{
+    return m_purpose;
+}
+
+void InputMethodManagerV2::onContentTypeChanged(uint32_t hint, uint32_t purpose)
+{
+    if(m_purpose != purpose){
+        m_purpose = purpose;
+        emit purposeChanged();
+    }
 }
 
 InputMethodV2::InputMethodV2(struct ::zwp_input_method_v2 *wl_object)
@@ -80,6 +96,7 @@ void InputMethodV2::zwp_input_method_v2_text_change_cause(uint32_t cause)
 
 void InputMethodV2::zwp_input_method_v2_content_type(uint32_t hint, uint32_t purpose)
 {
+    emit contentTypeChanged(hint, purpose);
 }
 
 void InputMethodV2::zwp_input_method_v2_done()

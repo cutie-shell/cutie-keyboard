@@ -16,6 +16,7 @@ class InputMethodManagerV2 : public QWaylandClientExtensionTemplate<InputMethodM
 
 {
 	Q_OBJECT
+	Q_PROPERTY(int purpose READ get_purpose NOTIFY purposeChanged)
 	QML_ELEMENT
 public:
 	InputMethodManagerV2();
@@ -24,6 +25,8 @@ public:
 	Q_INVOKABLE void pressed(QString string);
 	Q_INVOKABLE void released();
 
+	int get_purpose();
+
 public slots:
 	void handleExtensionActive();
 	void handleImActivated();
@@ -31,14 +34,19 @@ public slots:
 signals:
 	void inputMethodActivated();
 	void inputMethodDeactivated();
+	void purposeChanged();
 
 protected:
+
+private slots:
+	void onContentTypeChanged(uint32_t hint, uint32_t purpose);
 
 private:
 	InputMethodV2 *m_inputmethod;
 
 	bool m_activated = false;
 	bool m_hidden = true;
+	int m_purpose = 0;
 };
 
 class InputMethodV2 : public QWaylandClientExtensionTemplate<InputMethodV2>
@@ -52,6 +60,7 @@ public:
 signals:
 	void inputMethodActivated();
 	void inputMethodDeactivated();
+	void contentTypeChanged(uint32_t hint, uint32_t purpose);
 
 protected:
 	void zwp_input_method_v2_activate() override;
