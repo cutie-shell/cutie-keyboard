@@ -11,14 +11,15 @@ QT_BEGIN_NAMESPACE
 
 class InputMethodV2;
 
-class InputMethodManagerV2 : public QWaylandClientExtensionTemplate<InputMethodManagerV2>
-	, public QtWayland::zwp_input_method_manager_v2
+class InputMethodManagerV2
+	: public QWaylandClientExtensionTemplate<InputMethodManagerV2>,
+	  public QtWayland::zwp_input_method_manager_v2
 
 {
 	Q_OBJECT
 	Q_PROPERTY(int purpose READ get_purpose NOTIFY purposeChanged)
 	QML_ELEMENT
-public:
+    public:
 	InputMethodManagerV2();
 
 	Q_INVOKABLE void hideKeyboard();
@@ -27,21 +28,20 @@ public:
 
 	int get_purpose();
 
-public slots:
+    public slots:
 	void handleExtensionActive();
 	void handleImActivated();
-	
-signals:
+
+    signals:
 	void inputMethodActivated();
 	void inputMethodDeactivated();
 	void purposeChanged();
 
-protected:
-
-private slots:
+    protected:
+    private slots:
 	void onContentTypeChanged(uint32_t hint, uint32_t purpose);
 
-private:
+    private:
 	InputMethodV2 *m_inputmethod;
 
 	bool m_activated = false;
@@ -49,28 +49,29 @@ private:
 	int m_purpose = 0;
 };
 
-class InputMethodV2 : public QWaylandClientExtensionTemplate<InputMethodV2>
-	, public QtWayland::zwp_input_method_v2
-{
+class InputMethodV2 : public QWaylandClientExtensionTemplate<InputMethodV2>,
+		      public QtWayland::zwp_input_method_v2 {
 	Q_OBJECT
-public:
+    public:
 	InputMethodV2(struct ::zwp_input_method_v2 *wl_object);
 	uint32_t serial = 0;
 
-signals:
+    signals:
 	void inputMethodActivated();
 	void inputMethodDeactivated();
 	void contentTypeChanged(uint32_t hint, uint32_t purpose);
 
-protected:
+    protected:
 	void zwp_input_method_v2_activate() override;
 	void zwp_input_method_v2_deactivate() override;
-	void zwp_input_method_v2_surrounding_text(const QString &text, uint32_t cursor, uint32_t anchor) override;
+	void zwp_input_method_v2_surrounding_text(const QString &text,
+						  uint32_t cursor,
+						  uint32_t anchor) override;
 	void zwp_input_method_v2_text_change_cause(uint32_t cause) override;
-	void zwp_input_method_v2_content_type(uint32_t hint, uint32_t purpose) override;
+	void zwp_input_method_v2_content_type(uint32_t hint,
+					      uint32_t purpose) override;
 	void zwp_input_method_v2_done() override;
 	void zwp_input_method_v2_unavailable() override;
-
 };
 
 QT_END_NAMESPACE
