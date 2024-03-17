@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import Cutie
 
-Button {
+CutieButton {
     id: root
     font.pixelSize: 24
     palette.buttonText: Atmosphere.textColor
