@@ -17,8 +17,6 @@ CutieButton {
         anchors.fill: parent
         radius: mainView.isDialPad ? 25 : 5
         color: mainView.isDialPad && icon.name == "call-start-symbolic" ? "green" : Atmosphere.primaryColor
-        border.color: Atmosphere.secondaryColor
-        border.width: 1
         Rectangle {
             anchors.fill: parent
             radius: 5
