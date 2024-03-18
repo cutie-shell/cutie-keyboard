@@ -9,10 +9,6 @@
 int main(int argc, char *argv[])
 {
 	QGuiApplication app(argc, argv);
-
-	QIcon::setThemeName("default");
-	QIcon::setThemeSearchPaths(QStringList("/usr/share/icons"));
-
 	CutieKeyboard keyboard;
 
 	return app.exec();
