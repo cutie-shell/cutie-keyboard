@@ -125,7 +125,7 @@ Item {
                                     Repeater {
                                         model: shift ? kbdLayout.item.row1_model_shift : kbdLayout.item.row1_model
                                         
-                                        delegate: KeyButton {
+                                        delegate: CutieButton {
                                             text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height: inputMgr.purpose != 4 ? keyboard.height * 0.65 / rows - columnSpacing : keyboard.height / rows - columnSpacing
@@ -190,7 +190,7 @@ Item {
                                     Repeater {
                                         model: kbdLayout.item.row1B_model
                                         
-                                        delegate: KeyButton {
+                                        delegate: CutieButton {
                                             text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height: keyboard.height * 0.65 / rows - columnSpacing
@@ -282,7 +282,7 @@ Item {
                                     Repeater {
                                         model: kbdLayout.item.row2_model
                                         
-                                        delegate: KeyButton {
+                                        delegate: CutieButton {
                                             text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height: inputMgr.purpose != 4 ? keyboard.height * 1.05 / rows - columnSpacing : keyboard.height / rows - columnSpacing
@@ -337,7 +337,7 @@ Item {
                                     Repeater {
                                         model: kbdLayout.item.row3_model
                                         
-                                        delegate: KeyButton {
+                                        delegate: CutieButton {
                                             text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height:  inputMgr.purpose != 4 ? keyboard.height * 1.05 / rows - columnSpacing : keyboard.height / rows - columnSpacing
@@ -392,7 +392,7 @@ Item {
                                     Repeater {
                                         model: kbdLayout.item.row4_model
                                         
-                                        delegate: KeyButton {
+                                        delegate: CutieButton {
                                             text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height:  inputMgr.purpose != 4 ? keyboard.height * 1.05 / rows - columnSpacing : keyboard.height / rows - columnSpacing
@@ -458,7 +458,7 @@ Item {
                                     Repeater {
                                         model: kbdLayout.item.row2B_model
                                         
-                                        delegate: KeyButton {
+                                        delegate: CutieButton {
                                             text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height: keyboard.height * 1.05 / rows - columnSpacing
@@ -513,7 +513,7 @@ Item {
                                     Repeater {
                                         model: kbdLayout.item.row3B_model
                                         
-                                        delegate: KeyButton {
+                                        delegate: CutieButton {
                                             text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height: keyboard.height * 1.05 / rows - columnSpacing
@@ -568,7 +568,7 @@ Item {
                                     Repeater {
                                         model: kbdLayout.item.row4B_model
                                         
-                                        delegate: KeyButton {
+                                        delegate: CutieButton {
                                             text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : displayText
                                             width: keyWidth * keyboard.width / columns - rowSpacing
                                             height: keyboard.height * 1.05 / rows - columnSpacing
@@ -628,7 +628,7 @@ Item {
                         Repeater {
                             model: shift ? kbdLayout.item.row5_model_shift : kbdLayout.item.row5_model
                             
-                            delegate: KeyButton {
+                            delegate: CutieButton {
                                 text: displayText == "CUTIE_SPACE" ? kbdLayout.item.layout : shift && capitalization ? displayText.toUpperCase() : icon.name != "call-start-symbolic" ? displayText : ""
                                 width: keyWidth * keyboard.width / columns - rowSpacing
                                 height:  inputMgr.purpose != 4 ? keyboard.height * 1.05 / rows - columnSpacing : keyboard.height / rows - columnSpacing
