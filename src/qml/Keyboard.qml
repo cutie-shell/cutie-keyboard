@@ -132,6 +132,7 @@ Item {
                                             checked: displayText == "\u21E7" && mainView.shift || 
                                             displayText == "Ctrl" && mainView.ctrl ||
                                             displayText == "Alt" && mainView.alt
+                                            font.pixelSize: 20
                                             onPressAndHold: {
                                                 mainView.pressAndHold = true
                                                 if(displayText == "CUTIE_SPACE")
@@ -197,6 +198,7 @@ Item {
                                             checked: displayText == "\u21E7" && mainView.shift || 
                                             displayText == "Ctrl" && mainView.ctrl ||
                                             displayText == "Alt" && mainView.alt
+                                            font.pixelSize: 20
                                             onPressAndHold: {
                                                 mainView.pressAndHold = true
                                                 if(displayText == "CUTIE_SPACE")
@@ -289,6 +291,7 @@ Item {
                                             checked: displayText == "\u21E7" && mainView.shift || 
                                             displayText == "Ctrl" && mainView.ctrl ||
                                             displayText == "Alt" && mainView.alt
+                                            font.pixelSize: 20
                                             onPressAndHold: {
                                                 mainView.pressAndHold = true
                                                 if(displayText == "CUTIE_SPACE")
@@ -344,6 +347,7 @@ Item {
                                             checked: displayText == "\u21E7" && mainView.shift || 
                                             displayText == "Ctrl" && mainView.ctrl ||
                                             displayText == "Alt" && mainView.alt
+                                            font.pixelSize: 20
                                             onPressAndHold: {
                                                 mainView.pressAndHold = true
                                                 if(displayText == "CUTIE_SPACE")
@@ -399,6 +403,7 @@ Item {
                                             checked: displayText == "\u21E7" && mainView.shift || 
                                             displayText == "Ctrl" && mainView.ctrl ||
                                             displayText == "Alt" && mainView.alt
+                                            font.pixelSize: 20
                                             onPressAndHold: {
                                                 mainView.pressAndHold = true
                                                 if(displayText == "CUTIE_SPACE")
@@ -465,6 +470,7 @@ Item {
                                             checked: displayText == "\u21E7" && mainView.shift || 
                                             displayText == "Ctrl" && mainView.ctrl ||
                                             displayText == "Alt" && mainView.alt
+                                            font.pixelSize: 20
                                             onPressAndHold: {
                                                 mainView.pressAndHold = true
                                                 if(displayText == "CUTIE_SPACE")
@@ -520,6 +526,7 @@ Item {
                                             checked: displayText == "\u21E7" && mainView.shift || 
                                             displayText == "Ctrl" && mainView.ctrl ||
                                             displayText == "Alt" && mainView.alt
+                                            font.pixelSize: 20
                                             onPressAndHold: {
                                                 mainView.pressAndHold = true
                                                 if(displayText == "CUTIE_SPACE")
@@ -575,6 +582,7 @@ Item {
                                             checked: displayText == "\u21E7" && mainView.shift || 
                                             displayText == "Ctrl" && mainView.ctrl ||
                                             displayText == "Alt" && mainView.alt
+                                            font.pixelSize: 20
                                             onPressAndHold: {
                                                 mainView.pressAndHold = true
                                                 if(displayText == "CUTIE_SPACE")
@@ -635,6 +643,7 @@ Item {
                                 checked: displayText == "\u21E7" && mainView.shift || 
                                         displayText == "Ctrl" && mainView.ctrl ||
                                         displayText == "Alt" && mainView.alt
+                                font.pixelSize: 20
 
                                 onPressAndHold: {
                                     mainView.pressAndHold = true
