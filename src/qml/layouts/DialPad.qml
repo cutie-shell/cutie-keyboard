@@ -72,8 +72,7 @@ Item {
 	ListModel {
 		id: row5
 		ListElement{displayText: '+'; keyWidth: 2.3; capitalization: false;}
-		ListElement{displayText: '\u21B5'; keyWidth: 2.3; capitalization: false;}
-		ListElement{displayText: '\u21E6'; keyWidth: 2.3; capitalization: false;}
+		ListElement{displayText: '\u21E6'; keyWidth: 4.6; capitalization: false;}
 	}
 
 	ListModel {
