@@ -21,9 +21,9 @@ Item {
 
 	ListModel {
 		id: row1
-		ListElement{displayText: '1'; keyWidth: 2.3; capitalization: false;}
-		ListElement{displayText: '2'; keyWidth: 2.3; capitalization: false;}
-		ListElement{displayText: '3'; keyWidth: 2.3; capitalization: false;}
+		ListElement{displayText: '1'; keyWidth: 3.3; capitalization: false;}
+		ListElement{displayText: '2'; keyWidth: 3.3; capitalization: false;}
+		ListElement{displayText: '3'; keyWidth: 3.3; capitalization: false;}
 	}
 
 	ListModel {
@@ -36,9 +36,9 @@ Item {
 
 	ListModel {
 		id: row2
-		ListElement{displayText: '4'; keyWidth: 2.3; capitalization: false;}
-		ListElement{displayText: '5'; keyWidth: 2.3; capitalization: false;}
-		ListElement{displayText: '6'; keyWidth: 2.3; capitalization: false;}
+		ListElement{displayText: '4'; keyWidth: 3.3; capitalization: false;}
+		ListElement{displayText: '5'; keyWidth: 3.3; capitalization: false;}
+		ListElement{displayText: '6'; keyWidth: 3.3; capitalization: false;}
 	}
 
 	ListModel {
@@ -47,9 +47,9 @@ Item {
 
 	ListModel {
 		id: row3
-		ListElement{displayText: '7'; keyWidth: 2.3; capitalization: false;}
-		ListElement{displayText: '8'; keyWidth: 2.3; capitalization: false;}
-		ListElement{displayText: '9'; keyWidth: 2.3; capitalization: false;}
+		ListElement{displayText: '7'; keyWidth: 3.3; capitalization: false;}
+		ListElement{displayText: '8'; keyWidth: 3.3; capitalization: false;}
+		ListElement{displayText: '9'; keyWidth: 3.3; capitalization: false;}
 	}
 
 	ListModel {
@@ -58,9 +58,9 @@ Item {
 
 	ListModel {
 		id: row4
-		ListElement{displayText: '*'; keyWidth: 2.3; capitalization: false;}
-		ListElement{displayText: '0'; keyWidth: 2.3; capitalization: false;}
-		ListElement{displayText: '#'; keyWidth: 2.3; capitalization: false;}
+		ListElement{displayText: '*'; keyWidth: 3.3; capitalization: false;}
+		ListElement{displayText: '0'; keyWidth: 3.3; capitalization: false;}
+		ListElement{displayText: '#'; keyWidth: 3.3; capitalization: false;}
 		
 	}
 
@@ -71,8 +71,8 @@ Item {
 
 	ListModel {
 		id: row5
-		ListElement{displayText: '+'; keyWidth: 2.3; capitalization: false;}
-		ListElement{displayText: '\u21E6'; keyWidth: 4.6; capitalization: false;}
+		ListElement{displayText: '+'; keyWidth: 3.3; capitalization: false;}
+		ListElement{displayText: '\u21E6'; keyWidth: 6.6; capitalization: false;}
 	}
 
 	ListModel {
