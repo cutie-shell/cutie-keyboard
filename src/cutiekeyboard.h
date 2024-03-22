@@ -17,7 +17,7 @@ class CutieKeyboard : public QQuickView {
 
     public Q_SLOTS:
 	void showKeyboard();
-	void hideKeyboard();
+	void onExclZoneChanged();
 
     private slots:
 
@@ -25,6 +25,12 @@ class CutieKeyboard : public QQuickView {
 	QSize m_screenSize;
 	LayerShellQt::Window *m_lsWindow = nullptr;
 	InputMethodManagerV2 *m_inputMgr = nullptr;
+
+	/*
+		Setting m_keyboardHeight should end up in settings at one point.
+		The user should decide how tall he wants the keayboard.
+	*/
+	int m_keyboardHeight;
 };
 
 #endif //CUTIEKEYBOARD_H
