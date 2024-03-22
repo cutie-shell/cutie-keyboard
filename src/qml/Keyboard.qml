@@ -29,7 +29,6 @@ Item {
     property bool   alt:            false
     property double columns:        10
     property double rows:           5
-    property bool   hideKeyboard:   false
     property bool   pressAndHold:   false
     property bool   isDialPad:      inputMgr.purpose == 4
 
@@ -56,17 +55,15 @@ Item {
 
             onContentYChanged: {
                 if(contentY < -keyboard.height/3)
-                    mainView.hideKeyboard = true
+                    cancelFlick()
             }
 
             onMovementEnded: {
+                if(contentY < -keyboard.height/3)
+                    inputMgr.exclZone = 0
+
                 if(contentY != -5)
                     contentY = -5
-
-                if (mainView.hideKeyboard){
-                    mainView.hideKeyboard = false
-                    inputMgr.hideKeyboard()
-                }
             }
 
             Item { // keys

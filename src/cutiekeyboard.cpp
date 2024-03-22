@@ -5,6 +5,7 @@ CutieKeyboard::CutieKeyboard(QQuickView *parent)
 {
 	QScreen *screen = QGuiApplication::primaryScreen();
 	m_screenSize = screen->size();
+	m_keyboardHeight = m_screenSize.height() * 0.36;
 
 	LayerShellQt::Shell::useLayerShell();
 
@@ -13,9 +14,8 @@ CutieKeyboard::CutieKeyboard(QQuickView *parent)
 	m_lsWindow->setAnchors(LayerShellQt::Window::AnchorBottom);
 	m_lsWindow->setKeyboardInteractivity(
 		LayerShellQt::Window::KeyboardInteractivityNone);
-	m_lsWindow->setExclusiveZone(m_screenSize.height() * 0.36);
 	m_lsWindow->setScope("cutie-keyboard");
-	this->resize(m_screenSize.width(), m_screenSize.height() * 0.36);
+	this->resize(m_screenSize.width(), m_keyboardHeight);
 	this->setResizeMode(QQuickView::SizeRootObjectToView);
 	this->setSource(QUrl("qrc:/qml/Keyboard.qml"));
 	this->setColor(QColor(Qt::transparent));
@@ -25,18 +25,19 @@ CutieKeyboard::CutieKeyboard(QQuickView *parent)
 
 	connect(m_inputMgr, &InputMethodManagerV2::inputMethodActivated, this,
 		&CutieKeyboard::showKeyboard);
-	connect(m_inputMgr, &InputMethodManagerV2::inputMethodDeactivated, this,
-		&CutieKeyboard::hideKeyboard);
+	connect(m_inputMgr, &InputMethodManagerV2::exclZoneChanged, this,
+		&CutieKeyboard::onExclZoneChanged);
+
+	m_lsWindow->setExclusiveZone(m_inputMgr->get_exclZone());
 }
 
 void CutieKeyboard::showKeyboard()
 {
-	this->resize(m_screenSize.width(), m_screenSize.height() * 0.36);
 	QQuickView::show();
+	m_inputMgr->set_exclZone(m_keyboardHeight);
 }
 
-void CutieKeyboard::hideKeyboard()
+void CutieKeyboard::onExclZoneChanged()
 {
-	this->resize(1, 1);
-	QQuickView::hide();
+	m_lsWindow->setExclusiveZone(m_inputMgr->get_exclZone());
 }

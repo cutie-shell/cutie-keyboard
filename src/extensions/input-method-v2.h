@@ -18,15 +18,17 @@ class InputMethodManagerV2
 {
 	Q_OBJECT
 	Q_PROPERTY(int purpose READ get_purpose NOTIFY purposeChanged)
+	Q_PROPERTY(int exclZone READ get_exclZone WRITE set_exclZone NOTIFY exclZoneChanged)
 	QML_ELEMENT
     public:
 	InputMethodManagerV2();
 
-	Q_INVOKABLE void hideKeyboard();
 	Q_INVOKABLE void pressed(QString string);
 	Q_INVOKABLE void released();
 
 	int get_purpose();
+	int get_exclZone();
+	void set_exclZone(int exclZone);
 
     public slots:
 	void handleExtensionActive();
@@ -34,8 +36,8 @@ class InputMethodManagerV2
 
     signals:
 	void inputMethodActivated();
-	void inputMethodDeactivated();
 	void purposeChanged();
+	void exclZoneChanged();
 
     protected:
     private slots:
@@ -47,6 +49,10 @@ class InputMethodManagerV2
 	bool m_activated = false;
 	bool m_hidden = true;
 	int m_purpose = 0;
+	int m_exclZone = 0;
+
+	private slots:
+	void onInputMethodDeactivated();
 };
 
 class InputMethodV2 : public QWaylandClientExtensionTemplate<InputMethodV2>,

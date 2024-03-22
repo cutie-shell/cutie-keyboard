@@ -30,19 +30,9 @@ void InputMethodManagerV2::handleExtensionActive()
 		connect(m_inputmethod, &InputMethodV2::inputMethodActivated,
 			this, &InputMethodManagerV2::handleImActivated);
 		connect(m_inputmethod, &InputMethodV2::inputMethodDeactivated,
-			this, &InputMethodManagerV2::inputMethodDeactivated);
+			this, &InputMethodManagerV2::onInputMethodDeactivated);
 		connect(m_inputmethod, &InputMethodV2::contentTypeChanged, this,
 			&InputMethodManagerV2::onContentTypeChanged);
-	}
-}
-
-void InputMethodManagerV2::hideKeyboard()
-{
-	if (!m_hidden) {
-		m_hidden = true;
-		emit inputMethodDeactivated();
-		m_purpose = 0;
-		emit purposeChanged();
 	}
 }
 
@@ -66,6 +56,26 @@ void InputMethodManagerV2::released()
 int InputMethodManagerV2::get_purpose()
 {
 	return m_purpose;
+}
+
+int InputMethodManagerV2::get_exclZone()
+{
+	return m_exclZone;
+}
+
+void InputMethodManagerV2::set_exclZone(int exclZone)
+{
+	if(exclZone != m_exclZone) {
+		m_exclZone = exclZone;
+		emit exclZoneChanged();
+	}
+}
+
+void InputMethodManagerV2::onInputMethodDeactivated()
+{
+	set_exclZone(0);
+	m_purpose = 0;
+	emit purposeChanged();
 }
 
 void InputMethodManagerV2::onContentTypeChanged(uint32_t hint, uint32_t purpose)
