@@ -29,11 +29,11 @@ CutieKeyboard::CutieKeyboard(QQuickView *parent)
 		&CutieKeyboard::onExclZoneChanged);
 
 	m_lsWindow->setExclusiveZone(m_inputMgr->get_exclZone());
+	QQuickView::show();
 }
 
 void CutieKeyboard::showKeyboard()
 {
-	QQuickView::show();
 	m_inputMgr->set_exclZone(m_keyboardHeight);
 }
 

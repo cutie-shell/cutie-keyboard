@@ -140,20 +140,19 @@ Item {
 
                                             onClicked: {
                                                 if(!mainView.pressAndHold){
-                                                    if(text == '\u21E7'){
+                                                    if(text == '\u21E7')
                                                         shift = !shift
-                                                        return
-                                                    }
-                                                    if(text == 'Ctrl')
+                                                    else if(text == 'Ctrl')
                                                         ctrl = !ctrl
                                                     else if(text == 'Alt')
                                                         alt = !alt
-                                                    if(displayText == "CUTIE_SPACE")
+                                                    if(displayText == "CUTIE_SPACE" || icon.name == "call-start-symbolic")
                                                         inputMgr.pressed(displayText);
-                                                    else
+                                                    else{
                                                         inputMgr.pressed(text);
+                                                    }
                                                     inputMgr.released();
-                                                    if(text != 'Ctrl' && text != 'Alt'){
+                                                    if(text != 'Ctrl' && text != 'Alt' && text != '\u21E7'){
                                                         ctrl = false
                                                         alt = false
                                                         shift = false
@@ -206,20 +205,19 @@ Item {
 
                                             onClicked: {
                                                 if(!mainView.pressAndHold){
-                                                    if(text == '\u21E7'){
+                                                    if(text == '\u21E7')
                                                         shift = !shift
-                                                        return
-                                                    }
-                                                    if(text == 'Ctrl')
+                                                    else if(text == 'Ctrl')
                                                         ctrl = !ctrl
                                                     else if(text == 'Alt')
                                                         alt = !alt
-                                                    if(displayText == "CUTIE_SPACE")
+                                                    if(displayText == "CUTIE_SPACE" || icon.name == "call-start-symbolic")
                                                         inputMgr.pressed(displayText);
-                                                    else
+                                                    else{
                                                         inputMgr.pressed(text);
+                                                    }
                                                     inputMgr.released();
-                                                    if(text != 'Ctrl' && text != 'Alt'){
+                                                    if(text != 'Ctrl' && text != 'Alt' && text != '\u21E7'){
                                                         ctrl = false
                                                         alt = false
                                                         shift = false
@@ -299,20 +297,19 @@ Item {
 
                                             onClicked: {
                                                 if(!mainView.pressAndHold){
-                                                    if(text == '\u21E7'){
+                                                    if(text == '\u21E7')
                                                         shift = !shift
-                                                        return
-                                                    }
-                                                    if(text == 'Ctrl')
+                                                    else if(text == 'Ctrl')
                                                         ctrl = !ctrl
                                                     else if(text == 'Alt')
                                                         alt = !alt
-                                                    if(displayText == "CUTIE_SPACE")
+                                                    if(displayText == "CUTIE_SPACE" || icon.name == "call-start-symbolic")
                                                         inputMgr.pressed(displayText);
-                                                    else
+                                                    else{
                                                         inputMgr.pressed(text);
+                                                    }
                                                     inputMgr.released();
-                                                    if(text != 'Ctrl' && text != 'Alt'){
+                                                    if(text != 'Ctrl' && text != 'Alt' && text != '\u21E7'){
                                                         ctrl = false
                                                         alt = false
                                                         shift = false
@@ -355,20 +352,19 @@ Item {
 
                                             onClicked: {
                                                 if(!mainView.pressAndHold){
-                                                    if(text == '\u21E7'){
+                                                    if(text == '\u21E7')
                                                         shift = !shift
-                                                        return
-                                                    }
-                                                    if(text == 'Ctrl')
+                                                    else if(text == 'Ctrl')
                                                         ctrl = !ctrl
                                                     else if(text == 'Alt')
                                                         alt = !alt
-                                                    if(displayText == "CUTIE_SPACE")
+                                                    if(displayText == "CUTIE_SPACE" || icon.name == "call-start-symbolic")
                                                         inputMgr.pressed(displayText);
-                                                    else
+                                                    else{
                                                         inputMgr.pressed(text);
+                                                    }
                                                     inputMgr.released();
-                                                    if(text != 'Ctrl' && text != 'Alt'){
+                                                    if(text != 'Ctrl' && text != 'Alt' && text != '\u21E7'){
                                                         ctrl = false
                                                         alt = false
                                                         shift = false
@@ -411,20 +407,19 @@ Item {
 
                                             onClicked: {
                                                 if(!mainView.pressAndHold){
-                                                    if(text == '\u21E7'){
+                                                    if(text == '\u21E7')
                                                         shift = !shift
-                                                        return
-                                                    }
-                                                    if(text == 'Ctrl')
+                                                    else if(text == 'Ctrl')
                                                         ctrl = !ctrl
                                                     else if(text == 'Alt')
                                                         alt = !alt
-                                                    if(displayText == "CUTIE_SPACE")
+                                                    if(displayText == "CUTIE_SPACE" || icon.name == "call-start-symbolic")
                                                         inputMgr.pressed(displayText);
-                                                    else
+                                                    else{
                                                         inputMgr.pressed(text);
+                                                    }
                                                     inputMgr.released();
-                                                    if(text != 'Ctrl' && text != 'Alt'){
+                                                    if(text != 'Ctrl' && text != 'Alt' && text != '\u21E7'){
                                                         ctrl = false
                                                         alt = false
                                                         shift = false
@@ -478,20 +473,19 @@ Item {
 
                                             onClicked: {
                                                 if(!mainView.pressAndHold){
-                                                    if(text == '\u21E7'){
+                                                    if(text == '\u21E7')
                                                         shift = !shift
-                                                        return
-                                                    }
-                                                    if(text == 'Ctrl')
+                                                    else if(text == 'Ctrl')
                                                         ctrl = !ctrl
                                                     else if(text == 'Alt')
                                                         alt = !alt
-                                                    if(displayText == "CUTIE_SPACE")
+                                                    if(displayText == "CUTIE_SPACE" || icon.name == "call-start-symbolic")
                                                         inputMgr.pressed(displayText);
-                                                    else
+                                                    else{
                                                         inputMgr.pressed(text);
+                                                    }
                                                     inputMgr.released();
-                                                    if(text != 'Ctrl' && text != 'Alt'){
+                                                    if(text != 'Ctrl' && text != 'Alt' && text != '\u21E7'){
                                                         ctrl = false
                                                         alt = false
                                                         shift = false
@@ -534,20 +528,19 @@ Item {
 
                                             onClicked: {
                                                 if(!mainView.pressAndHold){
-                                                    if(text == '\u21E7'){
+                                                    if(text == '\u21E7')
                                                         shift = !shift
-                                                        return
-                                                    }
-                                                    if(text == 'Ctrl')
+                                                    else if(text == 'Ctrl')
                                                         ctrl = !ctrl
                                                     else if(text == 'Alt')
                                                         alt = !alt
-                                                    if(displayText == "CUTIE_SPACE")
+                                                    if(displayText == "CUTIE_SPACE" || icon.name == "call-start-symbolic")
                                                         inputMgr.pressed(displayText);
-                                                    else
+                                                    else{
                                                         inputMgr.pressed(text);
+                                                    }
                                                     inputMgr.released();
-                                                    if(text != 'Ctrl' && text != 'Alt'){
+                                                    if(text != 'Ctrl' && text != 'Alt' && text != '\u21E7'){
                                                         ctrl = false
                                                         alt = false
                                                         shift = false
@@ -590,20 +583,19 @@ Item {
 
                                             onClicked: {
                                                 if(!mainView.pressAndHold){
-                                                    if(text == '\u21E7'){
+                                                    if(text == '\u21E7')
                                                         shift = !shift
-                                                        return
-                                                    }
-                                                    if(text == 'Ctrl')
+                                                    else if(text == 'Ctrl')
                                                         ctrl = !ctrl
                                                     else if(text == 'Alt')
                                                         alt = !alt
-                                                    if(displayText == "CUTIE_SPACE")
+                                                    if(displayText == "CUTIE_SPACE" || icon.name == "call-start-symbolic")
                                                         inputMgr.pressed(displayText);
-                                                    else
+                                                    else{
                                                         inputMgr.pressed(text);
+                                                    }
                                                     inputMgr.released();
-                                                    if(text != 'Ctrl' && text != 'Alt'){
+                                                    if(text != 'Ctrl' && text != 'Alt' && text != '\u21E7'){
                                                         ctrl = false
                                                         alt = false
                                                         shift = false
@@ -652,20 +644,19 @@ Item {
 
                                 onClicked: {
                                     if(!mainView.pressAndHold){
-                                        if(text == '\u21E7'){
+                                        if(text == '\u21E7')
                                             shift = !shift
-                                            return
-                                        }
-                                        if(text == 'Ctrl')
+                                        else if(text == 'Ctrl')
                                             ctrl = !ctrl
                                         else if(text == 'Alt')
                                             alt = !alt
                                         if(displayText == "CUTIE_SPACE" || icon.name == "call-start-symbolic")
                                             inputMgr.pressed(displayText);
-                                        else
+                                        else{
                                             inputMgr.pressed(text);
+                                        }
                                         inputMgr.released();
-                                        if(text != 'Ctrl' && text != 'Alt'){
+                                        if(text != 'Ctrl' && text != 'Alt' && text != '\u21E7'){
                                             ctrl = false
                                             alt = false
                                             shift = false
