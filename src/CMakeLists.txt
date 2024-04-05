@@ -39,6 +39,7 @@ qt6_generate_wayland_protocol_client_sources(
 ${PROJECT_NAME}
     FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/protocols/input-method-unstable-v2.xml
+        ${CMAKE_CURRENT_SOURCE_DIR}/protocols/virtual-keyboard-unstable-v1.xml
 )
 
 qt6_add_qml_module(${PROJECT_NAME}
