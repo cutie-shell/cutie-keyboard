@@ -1,4 +1,5 @@
-#include "input-method-v2.h"
+#include <input-method-v2.h>
+#include <logging.h>
 
 #include <QtGui/QGuiApplication>
 #include <QtGui/qpa/qplatformnativeinterface.h>
@@ -17,6 +18,8 @@ InputMethodManagerV2::InputMethodManagerV2()
 void InputMethodManagerV2::handleExtensionActive()
 {
 	if (isActive() && !m_activated) {
+		qCDebug(CUTIE_KEYBOARD)
+			<< "InputMethodManagerV2 extension activated";
 		m_activated = true;
 		if (m_inputmethod == nullptr) {
 			void *seat = QGuiApplication::platformNativeInterface()
@@ -65,7 +68,7 @@ int InputMethodManagerV2::get_exclZone()
 
 void InputMethodManagerV2::set_exclZone(int exclZone)
 {
-	if(exclZone != m_exclZone) {
+	if (exclZone != m_exclZone) {
 		m_exclZone = exclZone;
 		emit exclZoneChanged();
 	}

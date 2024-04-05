@@ -10,10 +10,12 @@ file(GLOB_RECURSE qml_SRC CONFIGURE_DEPENDS
 
 set(APP_SOURCES 
 		main.cpp
-		cutiekeyboard.cpp)
+		cutiekeyboard.cpp
+		logging.h)
 
 set(APP_HEADERS
-		cutiekeyboard.cpp)
+		cutiekeyboard.cpp
+		logging.cpp)
 
 add_subdirectory(extensions)
 

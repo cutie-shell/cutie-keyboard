@@ -5,10 +5,14 @@
 #include <QIcon>
 #include <cutiekeyboard.h>
 #include <input-method-v2.h>
+#include <logging.h>
 
 int main(int argc, char *argv[])
 {
+	qInstallMessageHandler(cutieMessageHandler);
+
 	QGuiApplication app(argc, argv);
+
 	CutieKeyboard keyboard;
 
 	return app.exec();

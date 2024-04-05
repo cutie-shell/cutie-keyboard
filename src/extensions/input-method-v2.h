@@ -18,7 +18,8 @@ class InputMethodManagerV2
 {
 	Q_OBJECT
 	Q_PROPERTY(int purpose READ get_purpose NOTIFY purposeChanged)
-	Q_PROPERTY(int exclZone READ get_exclZone WRITE set_exclZone NOTIFY exclZoneChanged)
+	Q_PROPERTY(int exclZone READ get_exclZone WRITE set_exclZone NOTIFY
+			   exclZoneChanged)
 	QML_ELEMENT
     public:
 	InputMethodManagerV2();
@@ -51,7 +52,7 @@ class InputMethodManagerV2
 	int m_purpose = 0;
 	int m_exclZone = 0;
 
-	private slots:
+    private slots:
 	void onInputMethodDeactivated();
 };
 
@@ -81,4 +82,4 @@ class InputMethodV2 : public QWaylandClientExtensionTemplate<InputMethodV2>,
 };
 
 QT_END_NAMESPACE
-#endif //INPUT_METHOD_V2_
+#endif //INPUT_METHOD_V2

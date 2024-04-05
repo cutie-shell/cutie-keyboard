@@ -17,4 +17,6 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 target_link_libraries(${PROJECT_NAME} PUBLIC Qt6::Core Qt6::GuiPrivate Qt6::Quick Qt6::Qml Qt6::WaylandClient LayerShellQtInterface6)
 
+target_compile_definitions(${PROJECT_NAME} PUBLIC QT_MESSAGELOGCONTEXT)
+
 install(TARGETS ${PROJECT_NAME} DESTINATION /usr/bin)
