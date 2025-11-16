@@ -4,8 +4,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickView>
-#include <LayerShellQt6/shell.h>
-#include <LayerShellQt6/window.h>
+#include <LayerShellQt/shell.h>
+#include <LayerShellQt/window.h>
 
 #include <input-method-v2.h>
 

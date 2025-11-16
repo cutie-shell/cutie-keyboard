@@ -9,7 +9,7 @@ Build-Depends: pkg-kde-tools,
                qt6-base-private-dev,
                pkg-config,
                qt6-declarative-dev,
-               liblayershellqtinterface6-dev,
+               liblayershellqtinterface-dev,
                qt6-wayland,
                qt6-wayland-dev,
 Standards-Version: 4.5.1
@@ -18,5 +18,5 @@ Package: cutie-keyboard
 Architecture: any
 Multi-Arch: foreign
 Pre-Depends: ${misc:Pre-Depends}
-Depends: ${misc:Depends}, ${shlibs:Depends}, qml6-module-cutie, qt6-layer-shell
+Depends: ${misc:Depends}, ${shlibs:Depends}, qml6-module-cutie
 Description: This package contains the default keyboard for Cutie.
